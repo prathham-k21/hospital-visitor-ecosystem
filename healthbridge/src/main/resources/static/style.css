@@ -1,0 +1,125 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+    padding: 2rem;
+}
+
+/* Container Layout */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+h2 {
+    color: #34495e;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+/* Form Styling */
+.form-section {
+    background-color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    border: 1px solid #e5e7eb;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+input {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+button {
+    grid-column: span 2;
+    padding: 0.75rem;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #219150;
+}
+
+/* Table Styling */
+.list-section {
+    margin-top: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #34495e;
+    color: white;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Specific styling for the delete button in the table */
+td button {
+    grid-column: auto;
+    background-color: transparent;
+    color: #e74c3c !important;
+    border: 1px solid #e74c3c;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
+}
+
+td button:hover {
+    background-color: #e74c3c;
+    color: white !important;
+}

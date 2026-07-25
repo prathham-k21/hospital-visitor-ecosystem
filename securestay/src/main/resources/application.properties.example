@@ -1,0 +1,10 @@
+# MySQL Configuration
+spring.datasource.url=jdbc:mysql://localhost:3306/securestay_db
+spring.datasource.username=root
+spring.datasource.password=YOUR_PASSWORD_HERE
+
+# Gmail SMTP Configuration
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=your-email@gmail.com
+spring.mail.password=YOUR_GMAIL_APP_PASSWORD

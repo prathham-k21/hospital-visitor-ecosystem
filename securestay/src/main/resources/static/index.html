@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureStay | Terminal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <!-- Link to our external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="night-mode">
+
+<div class="container">
+    <header>
+        <div>
+            <h1>SecureStay</h1>
+            <p style="color:var(--text-muted); margin:0">Touchless Terminal v3.0</p>
+        </div>
+        <button id="theme-toggle" onclick="toggleTheme()">
+            <span id="theme-icon">🌙</span> <span id="theme-text">Night Mode</span>
+        </button>
+    </header>
+
+    <div class="glass-card" style="margin-bottom: 30px; text-align: center;">
+        <button id="scan-btn" class="btn-scan" onclick="toggleScanner()">📷 Scan Pass to Checkout</button>
+        <div id="reader" style="width: 100%; max-width: 400px; margin: 10px auto; display: none; border-radius: 12px; overflow: hidden;"></div>
+    </div>
+
+    <div class="grid-layout">
+        <div class="glass-card">
+            <h2 style="color:var(--primary); margin-top:0">Entry Form</h2>
+            <input type="text" id="name" placeholder="Visitor Name">
+            <input type="email" id="email" placeholder="Visitor Email">
+            <input type="text" id="phone" placeholder="Phone Number">
+
+            <!-- Integration Fields (Replaced Host inputs) -->
+            <input type="text" id="purpose" placeholder="Purpose of Visit">
+            <!-- Change type="number" to type="text" -->
+            <input type="text" id="patientId" placeholder="Visiting Patient ID (e.g. 201A)">
+
+            <button class="btn-checkin" onclick="checkIn()">Check In</button>
+        </div>
+
+        <div class="glass-card">
+            <h2 style="margin-top:0">Live Directory</h2>
+            <table>
+                <thead>
+                <tr><th>Visitor</th><th>Host</th><th>Action</th></tr>
+                </thead>
+                <tbody id="visitorTable"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Link to our external JS file (placed at the bottom for faster page loading) -->
+<script src="app.js"></script>
+
+</body>
+</html>

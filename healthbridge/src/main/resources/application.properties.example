@@ -1,0 +1,35 @@
+# ==============================================================
+# HEALTHBRIDGE MICROSERVICE CONFIGURATION
+# ==============================================================
+
+# --- Server Configuration ---
+# Setting this to 8081 ensures it doesn't clash with SecureStay (8082)
+server.port=8081
+
+# --- Database Connection (MySQL) ---
+# Update 'healthbridge_db' to match your actual schema name
+spring.datasource.url=jdbc:mysql://localhost:3306/healthbridge_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+spring.datasource.username=root
+# Replace 'root' with your actual MySQL password if you have one set
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# --- Hibernate / JPA Configuration ---
+# 'update' automatically updates the database schema when you change your Java entities
+spring.jpa.hibernate.ddl-auto=update
+
+# Formats the SQL in the console making it easier to debug
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# Specifies the MySQL dialect for optimized queries
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+# --- Error Handling & Logging ---
+# Prevents massive stack traces in the browser/client, keeping API responses clean
+server.error.include-stacktrace=never
+server.error.include-message=always
+
+# Log levels (Optional: change 'INFO' to 'DEBUG' if you need deeper troubleshooting)
+logging.level.org.springframework.web=INFO
+logging.level.org.hibernate.SQL=DEBUG

@@ -1,0 +1,146 @@
+================================================================================
+PROJECT DOCUMENTATION: SECURESTAY VMS
+================================================================================
+Project Type: Full-Stack Security Solution
+Objective: To replace manual visitor logs with a touchless, automated digital system.
+
+--------------------------------------------------------------------------------
+1. PROJECT DIRECTORY STRUCTURE
+--------------------------------------------------------------------------------
+SecureStay/
+|-- src/
+|   |-- main/
+|       |-- java/com/securestay/
+|       |   |-- controller/          # REST API Endpoints for frontend communication
+|       |   |-- model/               # Database Entities (Visitor schema)
+|       |   |-- repository/          # Data Access Layer (Spring Data JPA)
+|       |   |-- service/             # Business Logic (VisitorService, QR Gen, Mail)
+|       |   |-- DemoApplication.java # Spring Boot application entry point
+|       |
+|       |-- resources/
+|           |-- static/
+|           |   |-- index.html       # Frontend SPA (Touchless Terminal UI)
+|           |-- application.properties # App config (MySQL, Gmail SMTP, Server)
+|
+|-- target/                          # Compiled build output (Ignored in Git)
+|-- pom.xml                          # Maven dependencies (Spring, MySQL, ZXing)
+|-- .gitignore                       # Git ignored files configuration
+|-- README.md                        # High-level project summary
+
+--------------------------------------------------------------------------------
+2. PROJECT OVERVIEW & ARCHITECTURE
+--------------------------------------------------------------------------------
+SecureStay is a Visitor Management System (VMS) that automates the lifecycle of a 
+building visitor. It uses a Client-Server-Database architecture to ensure data 
+integrity and real-time responsiveness.
+
+* Frontend: A responsive Single Page Application (SPA) with a dynamic theme engine.
+* Backend: A RESTful API built with Spring Boot 3.x.
+* Database: MySQL for persistent storage of visitor logs.
+* Security: Integrated SMTP for automated host alerts and visitor digital passes.
+
+--------------------------------------------------------------------------------
+3. KEY FEATURES IMPLEMENTED
+--------------------------------------------------------------------------------
+[Touchless QR Lifecycle]
+* Server-Side Generation: Used the ZXing library to convert unique database IDs 
+  into QR codes on the fly.
+* MIME-Multi-Part Mailing: Implemented professional HTML emails that embed the QR 
+  code as an inline CID attachment to bypass email client security filters.
+
+[Real-Time Webcam Scanner]
+* Integrated html5-qrcode to turn any laptop/tablet camera into a security scanner.
+* Decodes QR data instantly to trigger an automated checkout REST call.
+
+[UX/UI Design]
+* CSS Variables: Implemented a theme-switching system (Day/Night mode) for 24/7 
+  terminal usability.
+* Async UX: Used JavaScript fetch and async/await to ensure the "Live Directory" 
+  updates without reloading the page.
+
+--------------------------------------------------------------------------------
+4. CORE COMPETENCIES LEARNED
+--------------------------------------------------------------------------------
+* Backend Engineering: Mastering the Service-Repository pattern and Dependency 
+  Injection in Spring Boot.
+* System Integration: Connecting local applications to global services (Gmail 
+  SMTP API).
+* Binary Data Handling: Converting Java objects into BitMatrices, then into PNG 
+  byte arrays, and finally into Base64 strings.
+* Web APIs: Working with the MediaDevices API to access hardware (webcams) via 
+  the browser.
+* Version Control: Professional Git management, including .gitignore security 
+  practices for sensitive credentials.
+
+--------------------------------------------------------------------------------
+5. PROBLEMS FACED & SOLUTIONS
+--------------------------------------------------------------------------------
+Problem A: Data Desync during Check-in
+* Issue: After a visitor checked in, the QR modal would pop up, but the "Live 
+  Directory" table wouldn't show the new name until the modal was closed.
+* Solution: Reordered the JavaScript execution flow using await loadActive() 
+  before the showQRCode() call, ensuring the UI state matches the database state 
+  before the user is interrupted.
+
+Problem B: The "Broken Image" Email Bug
+* Issue: Initial attempts to send the QR code via Base64 strings failed because 
+  Gmail/Outlook blocked "inline data URIs" for security.
+* Solution: Pivoted from Base64 strings to MIME-Inline Attachments. By attaching 
+  the image as a binary resource and referencing it via a Content-ID (CID), the 
+  image became part of the trusted email package.
+
+Problem C: "Headless" Environment Errors
+* Issue: The QR library (ZXing) failed to "draw" the image on the server, 
+  throwing java.awt.HeadlessException.
+* Solution: Configured the Spring Boot application properties to 
+  java.awt.headless = false, allowing the server to utilize internal drawing 
+  libraries without a physical display.
+
+--------------------------------------------------------------------------------
+6. FUTURE SCOPE
+--------------------------------------------------------------------------------
+As a student specializing in Data Science, the next steps for this project involve:
+1. Predictive Analytics: Using the historical logs to predict peak visitor hours 
+   using Machine Learning models (like Random Forest or SVM).
+2. Facial Recognition: Replacing QR codes with biometric check-ins using a 
+   Python/Flask microservice integrated into the existing Spring Boot backend.
+
+--------------------------------------------------------------------------------
+7. TECHNICAL DETAILS: LIBRARIES & KEY FUNCTIONS
+--------------------------------------------------------------------------------
+[Backend Libraries & Dependencies (pom.xml)]
+1. spring-boot-starter-web: Provides embedded Tomcat and REST API capabilities.
+2. spring-boot-starter-data-jpa: Simplifies database interactions using Hibernate.
+3. spring-boot-starter-mail: Wraps JavaMailSender for sending SMTP emails.
+4. mysql-connector-j: The JDBC driver that connects Spring Boot to MySQL.
+5. com.google.zxing:core & javase: "Zebra Crossing" library used for generating 
+   2D barcodes (QR codes) on the server.
+
+[Frontend Libraries]
+1. html5-qrcode: A lightweight JavaScript library used to interface with the 
+   device's MediaDevices API (webcam) for real-time QR decoding.
+
+[Key Backend Functions (VisitorService.java)]
+1. checkIn(Visitor visitor): Validates incoming data, saves the visitor state as 
+   'IN' to generate an ID, and triggers email routines.
+2. checkOut(Long id): Fetches the visitor by ID, updates checkout time, changes 
+   status to 'OUT', and sends a confirmation email.
+3. sendHtmlEmailWithQR(Visitor visitor): Constructs a MimeMessage, formats the 
+   HTML body, attaches the QR byte array as a Content-ID (CID) inline image, and 
+   dispatches the email.
+4. generateQRCodeBytes(String text): Uses ZXing's QRCodeWriter to encode a string 
+   into a BitMatrix, then writes it to a ByteArrayOutputStream as a PNG image.
+
+[Key Frontend Functions (index.html)]
+1. checkIn(): Asynchronously sends a POST request with form data to the backend, 
+   updates the UI to a "Processing..." state, and alerts the user upon success.
+2. loadActive(): Fetches all visitors with an 'IN' status via a GET request and 
+   dynamically injects HTML table rows to populate the Live Directory.
+3. startScanner(): Initializes the Html5Qrcode object, requests camera 
+   permissions, and sets up a callback to trigger checkOut() when a valid QR code 
+   is detected.
+4. stopScanner(): Safely terminates the camera feed and resets the UI button 
+   state to conserve device battery and memory.
+5. toggleTheme(): Manipulates CSS variables by toggling the 'light-mode' class 
+   on the document body, demonstrating client-side UI state management.
+================================================================================

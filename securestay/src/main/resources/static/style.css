@@ -1,0 +1,26 @@
+:root {
+    --bg: #0f172a; --card-bg: #1e293b; --text-main: #f8fafc;
+    --text-muted: #94a3b8; --border: #334155; --primary: #6366f1;
+    --input-bg: #0f172a; --success: #22c55e;
+}
+.light-mode {
+    --bg: #f1f5f9; --card-bg: #ffffff; --text-main: #0f172a;
+    --text-muted: #64748b; --border: #e2e8f0; --primary: #4f46e5;
+    --input-bg: #f8fafc;
+}
+body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text-main); margin: 0; padding: 40px 20px; transition: 0.3s; }
+.container { max-width: 1000px; margin: auto; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-left: 4px solid var(--primary); padding-left: 20px; }
+#theme-toggle { background: var(--card-bg); border: 1px solid var(--border); color: var(--text-main); padding: 8px 15px; border-radius: 99px; cursor: pointer; display: flex; gap: 8px; }
+.grid-layout { display: grid; grid-template-columns: 320px 1fr; gap: 30px; }
+.glass-card { background: var(--card-bg); padding: 25px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+input { width: 100%; padding: 12px; margin-bottom: 15px; background: var(--input-bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text-main); box-sizing: border-box; }
+.btn-checkin { background-color: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600; transition: 0.2s; }
+.btn-checkin:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-scan { background-color: var(--success); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600; margin-bottom: 20px; transition: 0.2s; }
+.btn-scan.active { background-color: #ef4444; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; padding: 12px; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+td { padding: 16px 12px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.btn-out { background: rgba(244, 63, 94, 0.1); color: #ef4444; border: 1px solid rgba(244, 63, 94, 0.2); padding: 5px 12px; border-radius: 6px; cursor: pointer; }
+@media (max-width: 850px) { .grid-layout { grid-template-columns: 1fr; } }

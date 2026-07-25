@@ -1,0 +1,63 @@
+# ==========================================
+# 1. Java & Spring Boot (Covers both backends)
+# ==========================================
+target/
+build/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.log.*
+
+# ==========================================
+# 2. IDE Configuration Files
+# ==========================================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VS Code
+.vscode/
+
+# Eclipse (Standard inclusion for Java projects)
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# ==========================================
+# 3. OS Generated Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ==========================================
+# 4. Node/Frontend (Future-proofing)
+# ==========================================
+# If you ever upgrade your SecureStay frontend to React/Node
+node_modules/
+dist/
+npm-debug.log
+
+# ==========================================
+# 5. Local Secrets
+# ==========================================
+.env
+*.env
+application-local.properties
+application-secret.properties
+
+# Ignoring the real properties file since an example file is provided
+application.properties

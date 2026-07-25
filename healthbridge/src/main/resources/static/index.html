@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthBridge - Patient Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>HealthBridge Dashboard</h1>
+
+    <div class="form-section">
+        <h2>Admit New Patient</h2>
+        <form id="patientForm">
+            <input type="text" id="fullName" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="number" id="age" placeholder="Age" required>
+            <input type="text" id="contactNumber" placeholder="Contact Number" required>
+            <input type="text" id="disease" placeholder="Disease/Symptoms">
+            <input type="text" id="roomNumber" placeholder="Assigned Room Number (e.g., 101A)" required>
+            <button type="submit">Admit Patient</button>
+        </form>
+    </div>
+
+    <div class="list-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h2>Current Patients</h2>
+            <button id="exportBtn" style="width: auto; background-color: #3498db;">Export to CSV</button>
+        </div>
+        <table id="patientTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Room</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="patientTableBody">
+            <!-- JavaScript will inject patient rows here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
